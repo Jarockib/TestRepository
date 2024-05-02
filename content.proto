@@ -1,0 +1,12 @@
+syntax = "proto3";
+option go_package = "/.";
+
+message Text {
+    int32 id = 1;
+    string author = 2;
+    string content = 3;
+}
+
+message Texts {
+    repeated Text texts = 1;
+}
