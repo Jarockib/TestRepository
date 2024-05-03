@@ -1,10 +1,8 @@
 syntax = "proto3";
 
-option go_package = "IPP-twitter";
+option go_package = ".";
 
-//optional/implicit/repeated for field type review if need to be added
-
-
+// Complete tweet with user data
 message Tweet {
     UserData user = 1;
     int32 tweet_id = 2;
@@ -16,19 +14,23 @@ message Tweet {
     }
 }
 
+// Message to post a tweet
 message PostRequest {
     Tweet msg = 1;
     int64 timestamp = 2;
 }
 
+// Response after posting
 message PostResponse {
     string status = 1;
 }
 
+// Message to get tweets
 message GetRequest {
     int32 amount = 1; //amount of messages to be retreived 
 }
 
+// Response with requested number of tweets
 message GetResponse {
     repeated Tweet msgs = 1;
 }
@@ -36,5 +38,5 @@ message GetResponse {
 // service to rpc
 service Services {
     rpc Post(PostRequest) returns (PostResponse);  // Post a message
-    rpc Get(GetRequest) returns (stream GetResponse);  // Request messages
+    rpc Get(GetRequest) returns (stream GetResponse);  // Request messages stream
 }
