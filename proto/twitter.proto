@@ -1,9 +1,6 @@
 syntax = "proto3";
 
-option go_package = "IPP-twitter";
-
-//optional/implicit/repeated for field type review if need to be added
-
+option go_package = "./";
 
 message Tweet {
     UserData user = 1;
