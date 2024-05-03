@@ -9,29 +9,32 @@ message Tweet {
     UserData user = 1;
     int32 tweet_id = 2;
     string text = 3;
-    int64 timestamp = 4; //Timestamp of posting
+    
+    message UserData {
+        int32 user_id = 1;
+        string user_name = 2;
+    }
 }
 
-// Data of the user
-message UserData {
-    int32 user_id = 1;
-    string user_name = 2;
-}
-// czy to nie powinien być service?
 message PostRequest {
     Tweet msg = 1;
+    int64 timestamp = 2;
 }
-// i to czy nie powinien być service?
+
 message PostResponse {
-    string error = 1;
+    string status = 1;
 }
-// i tu?
+
 message GetRequest {
-    int32 amount = 1; //amount of messages to be retreived
-    repeated Tweet msgs = 2; 
+    int32 amount = 1; //amount of messages to be retreived 
+}
+
+message GetResponse {
+    repeated Tweet msgs = 1;
 }
 
 // service to rpc
-service PostService {
-    rpc Post(PostRequest) returns (PostResponse);
+service Services {
+    rpc Post(PostRequest) returns (PostResponse);  // Post a message
+    rpc Get(GetRequest) returns (stream GetResponse);  // Request messages
 }
